@@ -58,6 +58,7 @@ def run_visualize_reach_curve(
     log_nls: np.ndarray,
     array_gross_reach: np.ndarray,
     array_unique_reach: np.ndarray,
+    save_file_path: str,
 ) -> None:
     x = np.linspace(0, max(array_gross_reach), 100)
     hill_y = hill_function(x, hill_nls[0], hill_nls[1])
@@ -75,7 +76,7 @@ def run_visualize_reach_curve(
     plt.legend()
     plt.tight_layout()
 
-    plt.savefig("reach_curve.png", dpi=500)
+    plt.savefig(save_file_path, dpi=500)
 
 
 def main():
@@ -118,6 +119,7 @@ def main():
         log_nls,
         array_gross_reach,
         array_unique_reach,
+        save_file_path="reach_curve.png",
     )
 
 
