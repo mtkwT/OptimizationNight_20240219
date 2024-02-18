@@ -1,4 +1,5 @@
 ## 数理最適化: Optimization Night #8 での発表資料のシミュレーションコード
+- https://optimization.connpass.com/event/308608/
 
 ## 最適化の実行
 以下でOK
