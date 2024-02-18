@@ -112,7 +112,7 @@ class ReachCalculator:
         """グロスリーチを計算する
 
         Returns:
-            pd.Series: インクリメンタルなグロスリーチのnumpy配列
+            np.ndarray: インクリメンタルなグロスリーチのnumpy配列
         """
         array_gross_reach = (
             self.df_reach.cumsum(axis=1).sum(axis=0).to_numpy()
@@ -124,7 +124,7 @@ class ReachCalculator:
         """ユニークリーチを計算する
 
         Returns:
-            pd.Series: インクリメンタルなユニークリーチのnumpy配列
+            np.ndarray: インクリメンタルなユニークリーチのnumpy配列
         """
         array_unique_reach = (
             self.df_reach.cummax(axis=1).sum(axis=0).to_numpy()

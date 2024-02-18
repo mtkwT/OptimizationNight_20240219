@@ -33,6 +33,7 @@ class TotalReachOptimizer:
         self.total_budget = total_budget
 
     def run_optimize(self):
+        """最適化の実行"""
         bounds = [
             (0, self.total_budget / gross_reach_cost)
             for gross_reach_cost in self.dict_gross_reach_cost.values()
