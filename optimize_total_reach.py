@@ -29,6 +29,18 @@ A_FOR_BETA_DISTRIBUTION = 1
 B_FOR_BETA_DISTRIBUTION = 5
 SEED = 42
 
+# 最適化のパラメータ
+# 放送局ごとのGross Reachの単価と全体の広告予算を設定し、最適化を実行する
+# 単位は万円とする
+DICT_GROSS_REACH_COST = {
+    "A": 12.5,
+    "B": 12,
+    "C": 11,
+    "D": 8,
+    "E": 7.5,
+}
+TOTAL_BUDGET = 2000
+
 
 def run_visualize_reach_curve_all_broadcaster(
     nls_params_dict: dict[str, np.ndarray],
@@ -50,6 +62,7 @@ def run_visualize_reach_curve_all_broadcaster(
 
 
 def main():
+    # ==== リーチデータ生成 & リーチカーブのパラメータ推定 ====
     # 放送局ごとにリーチデータを生成し、リーチカーブのパラメータを推定する
     nls_params_dict = {}
 
@@ -84,21 +97,11 @@ def main():
         save_file_path="reach_curve_all_broadcaster.png",
     )
 
-    # 放送局ごとのGross Reachの単価と全体の広告予算を設定し、最適化を実行する
-    # 単位は万円とする
-    dict_gross_reach_cost = {
-        "A": 12.5,
-        "B": 12,
-        "C": 11,
-        "D": 8,
-        "E": 7.5,
-    }
-    total_budget = 2000
-
+    # ===== 最適化 =====
     optimizer = TotalReachOptimizer(
         nls_params_dict=nls_params_dict,
-        dict_gross_reach_cost=dict_gross_reach_cost,
-        total_budget=total_budget,
+        dict_gross_reach_cost=DICT_GROSS_REACH_COST,
+        total_budget=TOTAL_BUDGET,
     )
     optimize_results = optimizer.run_optimize()
     logger.info(f"{optimize_results=}")
