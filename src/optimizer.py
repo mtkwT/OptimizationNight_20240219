@@ -158,10 +158,10 @@ class TotalReachOptimizer:
 
         df_optimize_results = pd.DataFrame(
             {
-                "Broadcaster": list(dict_gross_reach.keys()),
-                "Gross Reach(%)": list(dict_gross_reach.values()),
-                "Unique Reach(%)": list(dict_unique_reach.values()),
-                "Broadcast Cost(万円)": list(dict_broadcast_cost.values()),
+                "放送局": list(dict_gross_reach.keys()),
+                "グロスリーチ(%)": list(dict_gross_reach.values()),
+                "ユニークリーチ(%)": list(dict_unique_reach.values()),
+                "投下コスト(万円)": list(dict_broadcast_cost.values()),
             }
         )
 

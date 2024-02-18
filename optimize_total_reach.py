@@ -1,4 +1,6 @@
 import numpy as np
+import matplotlib.pyplot as plt
+import japanize_matplotlib
 
 from scipy.optimize import curve_fit
 from loguru import logger
@@ -18,13 +20,32 @@ NOT_REACH_RATIO_DICT = {
     "A": 0.15,
     "B": 0.2,
     "C": 0.25,
-    "D": 0.3,
-    "E": 0.35,
+    "D": 0.38,
+    "E": 0.45,
 }
 
 A_FOR_BETA_DISTRIBUTION = 1
 B_FOR_BETA_DISTRIBUTION = 5
 SEED = 42
+
+
+def run_visualize_reach_curve_all_broadcaster(
+    nls_params_dict: dict[str, np.ndarray],
+    max_gross_reach: float,
+    save_file_path: str,
+) -> None:
+    x = np.linspace(0, max_gross_reach, 100)
+
+    plt.figure(figsize=(5, 2.5))
+    for broadcaster_name, hill_nls in nls_params_dict.items():
+        hill_y = hill_function(x, hill_nls[0], hill_nls[1])
+        plt.plot(x, hill_y, label=f"{broadcaster_name}局", linestyle="-", alpha=0.75)
+    plt.xlabel("Gross reach (%)")
+    plt.ylabel("Unique reach (%)")
+    plt.grid(alpha=0.25)
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(save_file_path, dpi=350)
 
 
 def main():
@@ -56,6 +77,11 @@ def main():
         nls_params_dict[broadcaster_name] = hill_nls
 
     logger.info(f"{nls_params_dict=}")
+    run_visualize_reach_curve_all_broadcaster(
+        nls_params_dict=nls_params_dict,
+        max_gross_reach=400,
+        save_file_path="reach_curve_all_broadcaster.png",
+    )
 
     # 放送局ごとのGross Reachの単価と全体の広告予算を設定し、最適化を実行する
     # 単位は万円とする
