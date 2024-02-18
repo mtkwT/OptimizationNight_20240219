@@ -17,7 +17,7 @@ $ python optimize_total_reach.py
 - src/curve_function.py
   - hill関数と対数関数を定義
 
-- src/simulation.py
+- src/simulator.py
   - 確率的シミュレーションでリーチデータの生成と、グロスリーチ・ユニークリーチ計算を行うクラス
 
 - src/optimizer.py
